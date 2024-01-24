@@ -30,7 +30,13 @@ const DEFAULT_SEGMENTS: MP.Segment[] = [
 	{
 		type: 'input',
 		label: 'Camera',
-		options: ['Hasselblad'],
+		options: [
+			'Hasselblad',
+			'80s photography',
+			'90s photography',
+			'low-angle photography',
+			'aerial-view drone footage',
+		],
 	},
 	{
 		type: 'input',
