@@ -1,6 +1,8 @@
-<h1>Midjourney Prompter</h1>
+<h1 class="text-center p-4">Midjourney Prompter</h1>
 
-<slot />
+<main class="p-4">
+	<slot />
+</main>
 
 <script lang="ts">
 	import '../styles/app.css'

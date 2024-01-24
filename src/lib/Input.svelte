@@ -1,4 +1,4 @@
-<label>
+<label class="grid">
 	{label}
 	<input name={label} list="{label} list" type="text" bind:value />
 
@@ -14,10 +14,7 @@
 </label>
 
 <script lang="ts">
-	const { label, options } = $props<{
-		label: string
-		options?: string[]
-	}>()
+	const { label, value: v, options } = $props<App.InputPrompt>()
 
-	let value = $state('')
+	let value = $state(v)
 </script>

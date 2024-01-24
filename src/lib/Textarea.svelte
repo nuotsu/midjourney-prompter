@@ -1,4 +1,4 @@
-<label>
+<label class="grid">
 	{label}
 
 	<textarea bind:value name={label} />
@@ -7,7 +7,7 @@
 </label>
 
 <script lang="ts">
-	const { label } = $props<{ label: string }>()
+	const { label, value: v } = $props<App.TextareaPrompt>()
 
-	let value = $state('')
+	let value = $state(v)
 </script>

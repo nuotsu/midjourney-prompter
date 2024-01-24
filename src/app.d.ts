@@ -8,6 +8,23 @@ declare global {
 		// interface PageState {}
 		// interface Platform {}
 	}
+
+	namespace App {
+		type Prompt = TextareaPrompt | InputPrompt
+
+		type TextareaPrompt = {
+			type: 'textarea'
+			label: string
+			value?: string
+		}
+
+		type InputPrompt = {
+			type: 'input'
+			label: string
+			value?: string
+			options?: string[]
+		}
+	}
 }
 
 export {}
