@@ -1,6 +1,6 @@
 import { writable } from 'svelte/store'
 
-export const DEFAULT_PROMPT: App.Prompt[] = [
+const DEFAULT_SEGMENTS: App.Segment[] = [
 	{
 		type: 'textarea',
 		label: 'Subject',
@@ -33,4 +33,16 @@ export const DEFAULT_PROMPT: App.Prompt[] = [
 	},
 ]
 
-export const allPrompts = writable<Array<App.Prompt[]>>([DEFAULT_PROMPT])
+export class PrompterGenerator {
+	id: string
+	segments: App.Segment[]
+
+	constructor(segments: App.Segment[] = DEFAULT_SEGMENTS) {
+		this.id = Math.random().toString(36).substring(2, 8)
+		this.segments = segments
+
+		return this
+	}
+}
+
+export const allPrompts = writable([new PrompterGenerator()])

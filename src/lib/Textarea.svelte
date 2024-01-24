@@ -7,7 +7,7 @@
 </label>
 
 <script lang="ts">
-	const { label, value: v } = $props<App.TextareaPrompt>()
+	const { label, value: v } = $props<App.TextareaSegment>()
 
 	let value = $state(v)
 </script>

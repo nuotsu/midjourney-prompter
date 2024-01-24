@@ -2,8 +2,8 @@
 	<title>Midjourney Prompter</title>
 </svelte:head>
 
-{#each $allPrompts as prompts, index (index)}
-	<Prompter {prompts} {index} />
+{#each $allPrompts as prompter, index (prompter.id)}
+	<Prompter {prompter} {index} />
 {/each}
 
 <nav>
@@ -12,9 +12,9 @@
 
 <script>
 	import Prompter from '$lib/Prompter.svelte'
-	import { DEFAULT_PROMPT, allPrompts } from '$lib/store'
+	import { PrompterGenerator, allPrompts } from '$lib/store'
 
 	function newEmpty() {
-		$allPrompts = [...$allPrompts, DEFAULT_PROMPT]
+		$allPrompts = [...$allPrompts, new PrompterGenerator()]
 	}
 </script>

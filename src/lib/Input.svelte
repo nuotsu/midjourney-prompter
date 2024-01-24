@@ -14,7 +14,7 @@
 </label>
 
 <script lang="ts">
-	const { label, value: v, options } = $props<App.InputPrompt>()
+	const { label, value: v, options } = $props<App.InputSegment>()
 
 	let value = $state(v)
 </script>

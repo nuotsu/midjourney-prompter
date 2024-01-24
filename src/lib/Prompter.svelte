@@ -1,8 +1,16 @@
-<div class="grid sm:grid-cols-[auto,1fr] gap-4 items-start">
+<div id={prompter.id} class="grid sm:grid-cols-[auto,1fr] gap-4 items-start">
 	<div class="grid gap-4 w-[300px]">
 		<output>{output}</output>
+
 		<button on:click={copy} disabled={!output}>Copy</button>
-		<button on:click={duplicate}>Duplicate</button>
+
+		{#if output}
+			<button on:click={duplicate}>Duplicate</button>
+		{/if}
+
+		{#if $allPrompts.length > 1}
+			<button on:click={remove}>Delete</button>
+		{/if}
 	</div>
 
 	<form
@@ -10,11 +18,11 @@
 		bind:this={form}
 		on:input={generateOutput}
 	>
-		{#each prompts as prompt}
-			{#if prompt.type === 'textarea'}
-				<Textarea {...prompt} />
-			{:else if prompt.type === 'input'}
-				<Input {...prompt} />
+		{#each prompter.segments as segment}
+			{#if segment.type === 'textarea'}
+				<Textarea {...segment} />
+			{:else if segment.type === 'input'}
+				<Input {...segment} />
 			{/if}
 		{/each}
 
@@ -25,10 +33,11 @@
 <script lang="ts">
 	import Textarea from '$lib/Textarea.svelte'
 	import Input from '$lib/Input.svelte'
-	import { allPrompts } from './store'
+	import { PrompterGenerator, allPrompts } from './store'
+	import { onMount } from 'svelte'
 
-	const { prompts, index } = $props<{
-		prompts: App.Prompt[]
+	const { prompter, index } = $props<{
+		prompter: App.Prompter
 		index: number
 	}>()
 
@@ -44,17 +53,20 @@
 		})
 	})
 
+	onMount(generateOutput)
+
 	function generateOutput() {
 		if (!form) return
 
 		const formData = new FormData(form)
 
-		const newValues = prompts.map((prompt) => ({
-			...prompt,
-			value: formData.get(prompt.label) as string,
-		}))
-
-		$allPrompts[index] = newValues
+		$allPrompts[index] = {
+			...prompter,
+			segments: prompter.segments.map((segment) => ({
+				...segment,
+				value: formData.get(segment.label) as string,
+			})),
+		}
 
 		output = Object.entries(Object.fromEntries(formData.entries()))
 			.map(([key, value]) => {
@@ -63,7 +75,7 @@
 				return value
 			})
 			.filter(Boolean)
-			.join(' ')
+			.join(', ')
 	}
 
 	function copy() {
@@ -72,6 +84,13 @@
 	}
 
 	function duplicate() {
-		$allPrompts = [...$allPrompts, $allPrompts[index]]
+		$allPrompts = [
+			...$allPrompts,
+			new PrompterGenerator($allPrompts[index].segments),
+		]
+	}
+
+	function remove() {
+		$allPrompts = $allPrompts.filter(({ id }) => id !== prompter.id)
 	}
 </script>

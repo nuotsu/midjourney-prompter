@@ -10,19 +10,24 @@ declare global {
 	}
 
 	namespace App {
-		type Prompt = TextareaPrompt | InputPrompt
+		type Prompter = {
+			id: string
+			segments: Segment[]
+		}
 
-		type TextareaPrompt = {
-			type: 'textarea'
-			label: string
+		type Segment = TextareaSegment | InputSegment
+
+		type TextareaSegment = {
+			readonly type: 'textarea'
+			readonly label: string
 			value?: string
 		}
 
-		type InputPrompt = {
-			type: 'input'
-			label: string
+		type InputSegment = {
+			readonly type: 'input'
+			readonly label: string
 			value?: string
-			options?: string[]
+			readonly options?: string[]
 		}
 	}
 }
