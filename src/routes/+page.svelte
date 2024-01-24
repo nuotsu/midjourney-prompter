@@ -1,7 +1,3 @@
-<svelte:head>
-	<title>Midjourney Prompter</title>
-</svelte:head>
-
 <section class="grid gap-4">
 	{#each $allPrompts as prompter, index (prompter.id)}
 		<Prompter {prompter} {index} />

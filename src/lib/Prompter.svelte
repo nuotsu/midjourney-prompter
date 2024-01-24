@@ -3,7 +3,7 @@
 
 	<form
 		id="prompter-{prompter.id}"
-		class="grid grid-cols-[repeat(auto-fill,minmax(250px,1fr))] gap-4 items-start"
+		class="grid sm:grid-cols-[repeat(auto-fill,minmax(250px,1fr))] gap-4 items-start"
 		bind:this={form}
 		on:input={generateOutput}
 	>

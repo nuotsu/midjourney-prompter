@@ -1,4 +1,4 @@
-<div class="grid gap-2 w-[300px]">
+<div class="grid gap-2 sm:w-[300px]">
 	<output class="text-lightnavy font-mono">{output}</output>
 
 	{#if output}
