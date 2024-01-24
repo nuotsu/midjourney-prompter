@@ -3,6 +3,9 @@
 @tailwind utilities;
 
 @layer base {
+	* {
+		min-width: 0;
+	}
 
 	input,
 	textarea {
@@ -16,10 +19,16 @@
 			@apply border-red-500 ring ring-red-500/50;
 		}
 	}
+}
 
-	button {
+@layer components {
+	.action {
 		appearance: none;
 		padding: 0.5em 1em;
 		@apply bg-lightnavy/30;
+
+		&.warn {
+			@apply hover:bg-red-600;
+		}
 	}
 }

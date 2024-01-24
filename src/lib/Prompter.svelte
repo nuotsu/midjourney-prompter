@@ -1,22 +1,13 @@
 <div class="grid md:grid-cols-[auto,1fr] gap-4 items-start">
-	<div class="grid gap-2 w-[300px]">
-		<output class="text-lightnavy font-mono">{output}</output>
-
-		{#if output}
-			<button on:click={copy}>Copy</button>
-			<button on:click={duplicate}>Duplicate</button>
-		{/if}
-
-		{#if $allPrompts.length > 1}
-			<button on:click={remove}>Delete</button>
-		{/if}
-
-		{#if output}
-			<button form="prompter-{prompter.id}" class="col-span-full" type="reset">
-				Clear all
-			</button>
-		{/if}
-	</div>
+	<Actions
+		{output}
+		{prompter}
+		{index}
+		onClearAll={() => {
+			form?.reset()
+			generateOutput()
+		}}
+	/>
 
 	<form
 		id="prompter-{prompter.id}"
@@ -26,18 +17,19 @@
 	>
 		{#each prompter.segments as segment}
 			{#if segment.type === 'textarea'}
-				<Textarea {...segment} id={prompter.id} />
+				<Textarea {...segment} id={prompter.id} {output} />
 			{:else if segment.type === 'input'}
-				<Input {...segment} id={prompter.id} />
+				<Input {...segment} id={prompter.id} {output} />
 			{/if}
 		{/each}
 	</form>
 </div>
 
 <script lang="ts">
+	import Actions from './Actions.svelte'
 	import Textarea from '$lib/Textarea.svelte'
 	import Input from '$lib/Input.svelte'
-	import { PrompterGenerator, allPrompts } from './store'
+	import { allPrompts } from './store'
 	import { onMount } from 'svelte'
 
 	const { prompter, index } = $props<{
@@ -73,19 +65,9 @@
 			.join(', ')
 	}
 
-	function copy() {
-		if (!output) return
-		navigator.clipboard.writeText(output)
-	}
-
-	function duplicate() {
-		$allPrompts = [
-			...$allPrompts,
-			new PrompterGenerator($allPrompts[index].segments),
-		]
-	}
-
-	function remove() {
-		$allPrompts = $allPrompts.filter(({ id }) => id !== prompter.id)
-	}
+	$effect(() => {
+		form?.querySelectorAll('button.warn').forEach((btn) => {
+			btn.addEventListener('click', generateOutput)
+		})
+	})
 </script>

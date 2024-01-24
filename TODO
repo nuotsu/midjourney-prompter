@@ -1,3 +1,6 @@
 # TODO
 
+- save to local storage
+- clear button runs `generateOutput()`
 - `new PrompterGenerator().random()`
+- ChatGPT generate variations

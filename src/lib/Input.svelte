@@ -2,9 +2,13 @@
 	<div class="flex justify-between gap-4">
 		<label for="{label}-{id}">{label}</label>
 
-		{#if value}
-			<button on:click={() => (value = '')}>Clear</button>
-		{/if}
+		<button
+			class="action warn"
+			on:click={() => (value = '')}
+			hidden={!value || !output}
+		>
+			Clear
+		</button>
 	</div>
 
 	<input
@@ -32,7 +36,13 @@
 		options,
 		id,
 		attributes,
-	} = $props<MP.InputSegment & { id: string }>()
+		output,
+	} = $props<
+		MP.InputSegment & {
+			id: string
+			output: string
+		}
+	>()
 
 	let value = $state(v)
 </script>

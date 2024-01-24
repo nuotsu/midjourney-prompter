@@ -2,13 +2,15 @@
 	<title>Midjourney Prompter</title>
 </svelte:head>
 
-{#each $allPrompts as prompter, index (prompter.id)}
-	<Prompter {prompter} {index} />
-{/each}
+<section class="grid gap-4">
+	{#each $allPrompts as prompter, index (prompter.id)}
+		<Prompter {prompter} {index} />
+	{/each}
 
-<nav>
-	<button on:click={newEmpty}>New empty prompt</button>
-</nav>
+	<nav class="flex gap-2 justify-center">
+		<button class="action" on:click={newEmpty}>New empty prompt</button>
+	</nav>
+</section>
 
 <script>
 	import Prompter from '$lib/Prompter.svelte'
