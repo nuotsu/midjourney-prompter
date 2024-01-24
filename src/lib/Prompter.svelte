@@ -1,32 +1,36 @@
-<div id={prompter.id} class="grid sm:grid-cols-[auto,1fr] gap-4 items-start">
-	<div class="grid gap-4 w-[300px]">
-		<output>{output}</output>
-
-		<button on:click={copy} disabled={!output}>Copy</button>
+<div class="grid md:grid-cols-[auto,1fr] gap-4 items-start">
+	<div class="grid gap-2 w-[300px]">
+		<output class="text-lightnavy font-mono">{output}</output>
 
 		{#if output}
+			<button on:click={copy}>Copy</button>
 			<button on:click={duplicate}>Duplicate</button>
 		{/if}
 
 		{#if $allPrompts.length > 1}
 			<button on:click={remove}>Delete</button>
 		{/if}
+
+		{#if output}
+			<button form="prompter-{prompter.id}" class="col-span-full" type="reset">
+				Clear all
+			</button>
+		{/if}
 	</div>
 
 	<form
-		class="grid grid-cols-3 gap-4 items-start"
+		id="prompter-{prompter.id}"
+		class="grid grid-cols-[repeat(auto-fill,minmax(250px,1fr))] gap-4 items-start"
 		bind:this={form}
 		on:input={generateOutput}
 	>
 		{#each prompter.segments as segment}
 			{#if segment.type === 'textarea'}
-				<Textarea {...segment} />
+				<Textarea {...segment} id={prompter.id} />
 			{:else if segment.type === 'input'}
-				<Input {...segment} />
+				<Input {...segment} id={prompter.id} />
 			{/if}
 		{/each}
-
-		<button class="col-span-full" type="reset">Clear all</button>
 	</form>
 </div>
 
@@ -37,21 +41,12 @@
 	import { onMount } from 'svelte'
 
 	const { prompter, index } = $props<{
-		prompter: App.Prompter
+		prompter: MP.Prompter
 		index: number
 	}>()
 
 	let form = $state<HTMLFormElement | null>(null)
 	let output = $state('')
-
-	$effect(() => {
-		form?.querySelectorAll('button')?.forEach((e) => {
-			e.onclick = () => {
-				form?.reset()
-				generateOutput()
-			}
-		})
-	})
 
 	onMount(generateOutput)
 

@@ -1,4 +1,10 @@
 // See https://kit.svelte.dev/docs/types#app
+
+import type {
+	HTMLInputAttributes,
+	HTMLTextareaAttributes,
+} from 'svelte/elements'
+
 // for information about these interfaces
 declare global {
 	namespace App {
@@ -9,25 +15,28 @@ declare global {
 		// interface Platform {}
 	}
 
-	namespace App {
+	namespace MP {
 		type Prompter = {
 			id: string
 			segments: Segment[]
 		}
 
-		type Segment = TextareaSegment | InputSegment
-
-		type TextareaSegment = {
-			readonly type: 'textarea'
+		type SegmentDefaults = {
 			readonly label: string
 			value?: string
 		}
 
-		type InputSegment = {
+		type Segment = TextareaSegment | InputSegment
+
+		type TextareaSegment = SegmentDefaults & {
+			readonly type: 'textarea'
+			attributes?: Partial<HTMLTextareaAttributes>
+		}
+
+		type InputSegment = SegmentDefaults & {
 			readonly type: 'input'
-			readonly label: string
-			value?: string
 			readonly options?: string[]
+			attributes?: Partial<HTMLInputAttributes>
 		}
 	}
 }

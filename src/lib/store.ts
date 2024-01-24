@@ -1,6 +1,6 @@
 import { writable } from 'svelte/store'
 
-const DEFAULT_SEGMENTS: App.Segment[] = [
+const DEFAULT_SEGMENTS: MP.Segment[] = [
 	{
 		type: 'textarea',
 		label: 'Subject',
@@ -8,14 +8,24 @@ const DEFAULT_SEGMENTS: App.Segment[] = [
 	{
 		type: 'textarea',
 		label: 'Appearance',
+		attributes: {
+			placeholder: 'wearing...',
+		},
 	},
 	{
 		type: 'textarea',
-		label: 'Action',
+		label: 'Activity',
 	},
 	{
 		type: 'textarea',
 		label: 'Location',
+	},
+	{
+		type: 'textarea',
+		label: 'Style',
+		attributes: {
+			placeholder: 'in the style of...',
+		},
 	},
 	{
 		type: 'input',
@@ -26,6 +36,9 @@ const DEFAULT_SEGMENTS: App.Segment[] = [
 		type: 'input',
 		label: '--ar',
 		options: ['16:9'],
+		attributes: {
+			pattern: '[0-9]{1,}:[0-9]{1,}',
+		},
 	},
 	{
 		type: 'textarea',
@@ -35,9 +48,9 @@ const DEFAULT_SEGMENTS: App.Segment[] = [
 
 export class PrompterGenerator {
 	id: string
-	segments: App.Segment[]
+	segments: MP.Segment[]
 
-	constructor(segments: App.Segment[] = DEFAULT_SEGMENTS) {
+	constructor(segments: MP.Segment[] = DEFAULT_SEGMENTS) {
 		this.id = Math.random().toString(36).substring(2, 8)
 		this.segments = segments
 

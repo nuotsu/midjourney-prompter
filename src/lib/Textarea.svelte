@@ -1,13 +1,22 @@
-<label class="grid">
-	{label}
+<fieldset class="grid">
+	<div class="flex justify-between gap-4">
+		<label for="{label}-{id}">{label}</label>
 
-	<textarea bind:value name={label} />
+		{#if value}
+			<button on:click={() => (value = '')}>Clear</button>
+		{/if}
+	</div>
 
-	<button type="button" on:click={() => (value = '')}>Clear</button>
-</label>
+	<textarea id="{label}-{id}" name={label} {...attributes} bind:value />
+</fieldset>
 
 <script lang="ts">
-	const { label, value: v } = $props<App.TextareaSegment>()
+	const {
+		label,
+		value: v,
+		id,
+		attributes,
+	} = $props<MP.TextareaSegment & { id: string }>()
 
 	let value = $state(v)
 </script>

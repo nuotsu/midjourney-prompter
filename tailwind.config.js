@@ -4,6 +4,7 @@ export default {
 	theme: {
 		extend: {
 			colors: {
+				lightnavy: '#7d9ddf',
 				navy: '#061434',
 			},
 		},

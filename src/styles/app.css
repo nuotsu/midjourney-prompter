@@ -6,6 +6,20 @@
 
 	input,
 	textarea {
-		@apply bg-transparent border;
+		@apply w-full bg-transparent border border-lightnavy outline-none placeholder:text-lightnavy/50;
+
+		&:focus {
+			@apply ring ring-lightnavy/50;
+		}
+
+		&:invalid {
+			@apply border-red-500 ring ring-red-500/50;
+		}
+	}
+
+	button {
+		appearance: none;
+		padding: 0.5em 1em;
+		@apply bg-lightnavy/30;
 	}
 }

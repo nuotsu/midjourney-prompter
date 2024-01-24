@@ -1,20 +1,38 @@
-<label class="grid">
-	{label}
-	<input name={label} list="{label} list" type="text" bind:value />
+<fieldset class="grid">
+	<div class="flex justify-between gap-4">
+		<label for="{label}-{id}">{label}</label>
+
+		{#if value}
+			<button on:click={() => (value = '')}>Clear</button>
+		{/if}
+	</div>
+
+	<input
+		id="{label}-{id}"
+		name={label}
+		list="{label}-{id}-list"
+		type="text"
+		{...attributes}
+		bind:value
+	/>
 
 	{#if options}
-		<datalist id="{label} list">
+		<datalist id="{label}-{id}-list">
 			{#each options as option}
 				<option>{option}</option>
 			{/each}
 		</datalist>
 	{/if}
-
-	<button on:click={() => (value = '')}>Clear</button>
-</label>
+</fieldset>
 
 <script lang="ts">
-	const { label, value: v, options } = $props<App.InputSegment>()
+	const {
+		label,
+		value: v,
+		options,
+		id,
+		attributes,
+	} = $props<MP.InputSegment & { id: string }>()
 
 	let value = $state(v)
 </script>
