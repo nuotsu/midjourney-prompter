@@ -1,13 +1,5 @@
 <div class="grid md:grid-cols-[auto,1fr] gap-4 items-start">
-	<Actions
-		{output}
-		{prompter}
-		{index}
-		onClearAll={() => {
-			form?.reset()
-			generateOutput()
-		}}
-	/>
+	<Actions {output} {prompter} {index} {onClearAll} />
 
 	<form
 		id="prompter-{prompter.id}"
@@ -17,9 +9,9 @@
 	>
 		{#each prompter.segments as segment}
 			{#if segment.type === 'textarea'}
-				<Textarea {...segment} id={prompter.id} {output} />
+				<Textarea {...segment} id={prompter.id} />
 			{:else if segment.type === 'input'}
-				<Input {...segment} id={prompter.id} {output} />
+				<Input {...segment} id={prompter.id} />
 			{/if}
 		{/each}
 	</form>
@@ -63,6 +55,14 @@
 			})
 			.filter(Boolean)
 			.join(', ')
+	}
+
+	function onClearAll() {
+		form?.reset()
+		form?.querySelectorAll('input, textarea').forEach((e) => {
+			e.dispatchEvent(new Event('input'))
+		})
+		output = ''
 	}
 
 	$effect(() => {

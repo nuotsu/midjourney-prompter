@@ -2,11 +2,7 @@
 	<div class="flex justify-between gap-4">
 		<label for="{label}-{id}">{label}</label>
 
-		<button
-			class="action warn"
-			on:click={() => (value = '')}
-			hidden={!value || !output}
-		>
+		<button class="action warn" on:click={() => (value = '')} hidden={!value}>
 			Clear
 		</button>
 	</div>
@@ -20,13 +16,7 @@
 		value: v,
 		id,
 		attributes,
-		output,
-	} = $props<
-		MP.TextareaSegment & {
-			id: string
-			output: string
-		}
-	>()
+	} = $props<MP.TextareaSegment & { id: string }>()
 
 	let value = $state(v)
 </script>
