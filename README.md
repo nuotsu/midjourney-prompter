@@ -4,7 +4,7 @@
 
 ## Roadmap / TODO
 
-- save to local storage
+- prompt settings (user input)
 - more `--` flags
 - `new PrompterGenerator().random()`
 - ChatGPT generate variations

@@ -3,6 +3,7 @@
 
 	{#if output}
 		<Copy value={output} />
+
 		<button class="action" on:click={duplicate}>Duplicate</button>
 	{/if}
 
@@ -26,14 +27,16 @@
 	import Copy from './Copy.svelte'
 	import { PrompterGenerator, allPrompts } from './store'
 
-	const { output, prompter, index, onClearAll } = $props<{
+	const { output, prompter, onDelete, onClearAll } = $props<{
 		output: string
 		prompter: MP.Prompter
-		index: number
+		onDelete: () => void
 		onClearAll: () => void
 	}>()
 
 	function duplicate() {
+		const index = $allPrompts.findIndex(({ id }) => id === prompter.id)
+
 		$allPrompts = [
 			...$allPrompts,
 			new PrompterGenerator($allPrompts[index].segments),
@@ -42,5 +45,7 @@
 
 	function remove() {
 		$allPrompts = $allPrompts.filter(({ id }) => id !== prompter.id)
+
+		onDelete()
 	}
 </script>

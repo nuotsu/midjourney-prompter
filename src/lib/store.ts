@@ -64,4 +64,4 @@ export class PrompterGenerator {
 	}
 }
 
-export const allPrompts = writable([new PrompterGenerator()])
+export const allPrompts = writable<MP.Prompter[]>([])

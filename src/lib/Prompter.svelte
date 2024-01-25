@@ -1,11 +1,11 @@
 <div class="grid md:grid-cols-[auto,1fr] gap-4 items-start">
-	<Actions {output} {prompter} {index} {onClearAll} />
+	<Actions {output} {prompter} onDelete={handleInput} {onClearAll} />
 
 	<form
 		id="prompter-{prompter.id}"
 		class="grid sm:grid-cols-[repeat(auto-fill,minmax(250px,1fr))] gap-4 items-start"
 		bind:this={form}
-		on:input={generateOutput}
+		on:input={handleInput}
 	>
 		{#each prompter.segments as segment}
 			{#if segment.type === 'textarea'}
@@ -23,21 +23,26 @@
 	import Input from '$lib/Input.svelte'
 	import { allPrompts } from './store'
 	import { onMount } from 'svelte'
+	import generateOutput from './generateOutput'
 
-	const { prompter, index } = $props<{
-		prompter: MP.Prompter
-		index: number
-	}>()
+	const { prompter } = $props<{ prompter: MP.Prompter }>()
 
 	let form = $state<HTMLFormElement | null>(null)
 	let output = $state('')
 
-	onMount(generateOutput)
+	$effect(() => {
+		form?.querySelectorAll('button.warn').forEach((btn) => {
+			btn.addEventListener('click', handleInput)
+		})
+	})
 
-	function generateOutput() {
+	onMount(handleInput)
+
+	function handleInput() {
 		if (!form) return
 
 		const formData = new FormData(form)
+		const index = $allPrompts.findIndex(({ id }) => id === prompter.id)
 
 		$allPrompts[index] = {
 			...prompter,
@@ -47,14 +52,9 @@
 			})),
 		}
 
-		output = Object.entries(Object.fromEntries(formData.entries()))
-			.map(([key, value]) => {
-				if (!value) return
-				if (key.startsWith('--')) return `${key} ${value}`
-				return value
-			})
-			.filter(Boolean)
-			.join(', ')
+		output = generateOutput(formData)
+
+		localStorage.setItem('allPrompts', JSON.stringify($allPrompts))
 	}
 
 	function onClearAll() {
@@ -62,12 +62,6 @@
 		form?.querySelectorAll('input, textarea').forEach((e) => {
 			e.dispatchEvent(new Event('input'))
 		})
-		output = ''
+		handleInput()
 	}
-
-	$effect(() => {
-		form?.querySelectorAll('button.warn').forEach((btn) => {
-			btn.addEventListener('click', generateOutput)
-		})
-	})
 </script>
