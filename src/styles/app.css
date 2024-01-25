@@ -19,6 +19,10 @@
 			@apply border-red-500 ring ring-red-500/50;
 		}
 	}
+
+	hr {
+		@apply border-dashed border-lightnavy;
+	}
 }
 
 @layer components {

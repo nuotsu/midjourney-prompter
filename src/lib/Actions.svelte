@@ -21,11 +21,16 @@
 			Clear all
 		</button>
 	{/if}
+
+	{#if prompter.random}
+		<button class="action" on:click={randomize}>Randomize 🤪</button>
+	{/if}
 </div>
 
 <script lang="ts">
 	import Copy from './Copy.svelte'
-	import { PrompterGenerator, allPrompts } from './store'
+	import { PrompterGenerator } from './PrompterGenerator'
+	import { allPrompts } from './store'
 
 	const { output, prompter, onDelete, onClearAll } = $props<{
 		output: string
@@ -47,5 +52,11 @@
 		$allPrompts = $allPrompts.filter(({ id }) => id !== prompter.id)
 
 		onDelete()
+	}
+
+	function randomize() {
+		const index = $allPrompts.findIndex(({ id }) => id === prompter.id)
+
+		$allPrompts[index] = new PrompterGenerator().randomize()
 	}
 </script>

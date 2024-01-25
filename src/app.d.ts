@@ -19,6 +19,7 @@ declare global {
 		type Prompter = {
 			id: string
 			segments: Segment[]
+			random?: boolean
 		}
 
 		type SegmentDefaults = {
@@ -28,16 +29,18 @@ declare global {
 
 		type Segment = TextareaSegment | InputSegment
 
-		type TextareaSegment = SegmentDefaults & {
-			readonly type: 'textarea'
-			attributes?: Partial<HTMLTextareaAttributes>
-		}
+		type TextareaSegment = SegmentDefaults &
+			Readonly<{
+				type: 'textarea'
+				attributes?: Partial<HTMLTextareaAttributes>
+			}>
 
-		type InputSegment = SegmentDefaults & {
-			readonly type: 'input'
-			readonly options?: string[]
-			attributes?: Partial<HTMLInputAttributes>
-		}
+		type InputSegment = SegmentDefaults &
+			ReadOnly<{
+				type: 'input'
+				options?: string[]
+				attributes?: Partial<HTMLInputAttributes>
+			}>
 	}
 }
 

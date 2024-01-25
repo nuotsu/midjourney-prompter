@@ -6,5 +6,5 @@
 
 - prompt settings (user input)
 - more `--` flags
-- `new PrompterGenerator().random()`
+- `new PrompterGenerator().random()` with faker.js
 - ChatGPT generate variations
