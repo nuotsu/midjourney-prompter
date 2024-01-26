@@ -2,7 +2,11 @@
 	<div class="flex justify-between gap-4">
 		<label for="{label}-{id}">{label}</label>
 
-		<button class="action warn" on:click={() => (value = '')} hidden={!value}>
+		<button
+			class="hover:text-red-600"
+			on:click={() => (value = '')}
+			hidden={!value}
+		>
 			Clear
 		</button>
 	</div>

@@ -1,4 +1,4 @@
-<div class="grid md:grid-cols-[auto,1fr] gap-4 items-start">
+<div class="grid md:grid-cols-[auto,1fr] gap-x-6 gap-y-4 items-start anim-fade">
 	<Actions {output} {prompter} onDelete={handleInput} {onClearAll} />
 
 	<form
@@ -31,7 +31,7 @@
 	let output = $state('')
 
 	$effect(() => {
-		form?.querySelectorAll('button.warn').forEach((btn) => {
+		form?.querySelectorAll('fieldset button').forEach((btn) => {
 			btn.addEventListener('click', handleInput)
 		})
 	})

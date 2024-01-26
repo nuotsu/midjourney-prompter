@@ -1,7 +1,7 @@
 <section class="grid gap-4">
 	{#each $allPrompts as prompter (prompter.id)}
 		<Prompter {prompter} />
-		<hr />
+		<hr class="my-4" />
 	{/each}
 
 	<nav class="flex gap-2 justify-center">

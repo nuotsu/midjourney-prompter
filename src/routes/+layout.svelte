@@ -19,7 +19,7 @@
 	</p>
 
 	<nav>
-		<a href="https://www.midjourney.com/imagine" target="_blank">
+		<a class="link" href="https://www.midjourney.com/imagine" target="_blank">
 			Midjourney Website
 		</a>
 	</nav>
