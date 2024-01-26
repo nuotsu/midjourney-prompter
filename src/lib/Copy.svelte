@@ -9,7 +9,7 @@
 <script lang="ts">
 	import type { HTMLButtonAttributes } from 'svelte/elements'
 
-	const { value, ...props } = $props<{ value: string } & HTMLButtonAttributes>()
+	let { value, ...props } = $props<{ value: string } & HTMLButtonAttributes>()
 
 	let copied = $state(false)
 

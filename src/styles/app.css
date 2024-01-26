@@ -18,10 +18,15 @@
 	.action {
 		appearance: none;
 		padding: 0.5em 1em;
+		outline: none;
 		@apply bg-lightnavy/30 rounded border border-white/10;
 
+		&:focus {
+			@apply ring ring-lightnavy/20 border-white/20;
+		}
+
 		&.warn {
-			@apply hover:bg-red-600;
+			@apply hover:bg-red-600 focus:ring hover:focus:ring-red-600/40;
 		}
 
 		&:not(.warn) {
@@ -33,12 +38,12 @@
 		@apply hover:underline;
 	}
 
-	input,
-	textarea {
-		@apply w-full p-[.5em] bg-transparent rounded border border-lightnavy outline-none placeholder:text-lightnavy/50;
+	.input {
+		padding: .25em .5em;
+		@apply w-full bg-transparent rounded border border-lightnavy/50 outline-none placeholder:text-lightnavy/20;
 
 		&:focus {
-			@apply ring ring-lightnavy/50;
+			@apply ring ring-lightnavy/20;
 		}
 
 		&:invalid {

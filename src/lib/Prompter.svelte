@@ -19,13 +19,12 @@
 
 <script lang="ts">
 	import Actions from './Actions.svelte'
-	import Textarea from '$lib/Textarea.svelte'
-	import Input from '$lib/Input.svelte'
+	import { Input, Textarea } from '$lib/segments'
 	import { allPrompts } from './store'
 	import { onMount } from 'svelte'
 	import generateOutput from './generateOutput'
 
-	const { prompter } = $props<{ prompter: MP.Prompter }>()
+	let { prompter } = $props<{ prompter: MP.Prompter }>()
 
 	let form = $state<HTMLFormElement | null>(null)
 	let output = $state('')

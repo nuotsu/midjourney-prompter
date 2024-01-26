@@ -4,6 +4,8 @@
 
 ## Roadmap / TODO
 
+- add image uploading
+- camera[]
 - prompt settings (user input)
 - openai tp enhance prompts
 - suggestionbox form

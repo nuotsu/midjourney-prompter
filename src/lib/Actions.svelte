@@ -15,7 +15,9 @@
 				form="prompter-{prompter.id}"
 				class="action warn"
 				type="reset"
-				on:click={onClearAll}
+				on:click={() => {
+					confirm('Are you sure you want to clear all?') && onClearAll()
+				}}
 			>
 				Clear all
 			</button>
@@ -32,7 +34,7 @@
 	import { PrompterGenerator } from './PrompterGenerator'
 	import { allPrompts } from './store'
 
-	const { output, prompter, onDelete, onClearAll } = $props<{
+	let { output, prompter, onDelete, onClearAll } = $props<{
 		output: string
 		prompter: MP.Prompter
 		onDelete: () => void

@@ -32,7 +32,7 @@ export class PrompterGenerator {
 						return `wearing ${faker.color.human()} ${adjective} attire`
 
 					case 'Activity':
-						const verbing = `${faker.word.verb().replace(/[^e]e$/g, '')}ing`
+						const verbing = `${faker.word.verb().replace(/e?e$/g, '')}ing`
 						const noun = faker.word.noun()
 						const object = noun.match(/^[aeiou]/) ? `an ${noun}` : `a ${noun}`
 						return `${faker.word.adverb()} ${verbing} ${object}`
@@ -45,6 +45,9 @@ export class PrompterGenerator {
 
 					case 'Location':
 						return `in ${faker.location.country()}`
+
+					case '--style':
+						return 'raw'
 				}
 			}
 

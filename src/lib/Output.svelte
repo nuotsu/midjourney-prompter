@@ -1,5 +1,5 @@
 <label for="output-{prompter.id}" class="relative text-sm">
-	<output class="text-lightnavy font-mono">
+	<output class="text-lightnavy font-mono" class:glow={output}>
 		{#if output}
 			{output}
 		{:else}
@@ -20,6 +20,10 @@
 </label>
 
 <style lang="postcss">
+	.glow {
+		text-shadow: 0 0 0.5em theme('colors.lightnavy');
+	}
+
 	.point {
 		animation: point 0.6s ease-in-out infinite alternate;
 	}
@@ -42,7 +46,7 @@
 <script lang="ts">
 	import Copy from './Copy.svelte'
 
-	const { output, prompter } = $props<{
+	let { output, prompter } = $props<{
 		output: string
 		prompter: MP.Prompter
 	}>()

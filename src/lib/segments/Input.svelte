@@ -1,17 +1,6 @@
-<fieldset class="grid">
-	<div class="flex justify-between gap-4">
-		<label for="{label}-{id}">{label}</label>
-
-		<button
-			class="hover:text-red-600"
-			on:click={() => (value = '')}
-			hidden={!value}
-		>
-			Clear
-		</button>
-	</div>
-
+<Segment id="{label}-{id}" {label} {value} on:click={() => (value = '')}>
 	<input
+		class="input"
 		id="{label}-{id}"
 		name={label}
 		list="{label}-{id}-list"
@@ -27,10 +16,12 @@
 			{/each}
 		</datalist>
 	{/if}
-</fieldset>
+</Segment>
 
 <script lang="ts">
-	const {
+	import Segment from './Segment.svelte'
+
+	let {
 		label,
 		value: v,
 		options,
