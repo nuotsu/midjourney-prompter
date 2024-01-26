@@ -7,15 +7,30 @@
 		min-width: 0;
 	}
 
+	::selection {
+		@apply bg-lightnavy text-white;
+	}
+
+	html {
+		@apply accent-lightnavy caret-lightnavy;
+	}
+
 	hr {
 		@apply border-dashed border-lightnavy;
 	}
 }
 
 @layer components {
+	/* typography */
+
+	.technical {
+		@apply uppercase tracking-widest;
+	}
+
 	/* ctas */
 
 	.action {
+		user-select: none;
 		appearance: none;
 		padding: 0.5em 1em;
 		outline: none;

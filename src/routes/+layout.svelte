@@ -3,7 +3,7 @@
 </svelte:head>
 
 <header>
-	<h1 class="text-center p-4">⛵️ {title}</h1>
+	<h1 class="p-4 text-center text-2xl">{title}</h1>
 </header>
 
 <main class="p-4">
@@ -28,5 +28,5 @@
 <script lang="ts">
 	import '../styles/app.css'
 
-	const title = 'Midjourney Prompter'
+	const title = '⛵️ Midjourney Prompter'
 </script>

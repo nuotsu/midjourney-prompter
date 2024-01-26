@@ -15,6 +15,10 @@
 			{/if}
 		{/each}
 	</form>
+
+	<p class="text-right col-span-full">
+		<code class="text-[xx-small] text-lightnavy">ID: {prompter.id}</code>
+	</p>
 </div>
 
 <script lang="ts">

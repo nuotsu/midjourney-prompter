@@ -1,4 +1,4 @@
-<div class="@container grid gap-4 md:w-[300px]">
+<div class="@container grid gap-4 md:w-[300px] md:sticky top-4">
 	<Output {output} {prompter} />
 
 	<div class="grid gap-2 @xs:grid-cols-[repeat(auto-fit,minmax(250px,1fr))]">

@@ -1,9 +1,11 @@
 <fieldset class="grid">
-	<div class="flex justify-between gap-4">
-		<label for={id}>{label}</label>
+	<div class="flex items-center justify-between gap-4 mb-1 text-xs">
+		<label for={id} class="grow text-lightnavy">
+			{label}
+		</label>
 
 		<button
-			class="text-xs transition-[opacity,translate] hover:text-red-600"
+			class="transition-[opacity,translate] hover:text-red-600"
 			on:click
 			hidden={!value}
 		>
@@ -15,6 +17,10 @@
 </fieldset>
 
 <style>
+	fieldset:hover :global(.input) {
+		@apply border-lightnavy;
+	}
+
 	@media (pointer: fine) {
 		fieldset:not(:hover) :global(button) {
 			pointer-events: none;
