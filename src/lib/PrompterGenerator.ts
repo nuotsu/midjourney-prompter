@@ -5,7 +5,11 @@ export class PrompterGenerator {
 	segments: MP.Segment[]
 	random?: boolean
 
-	constructor(segments: MP.Segment[] = DEFAULT_SEGMENTS) {
+	constructor({
+		segments = DEFAULT_SEGMENTS,
+	}: {
+		segments?: MP.Segment[]
+	} = {}) {
 		this.id = Math.random().toString(36).substring(2, 8)
 		this.segments = segments
 
@@ -21,20 +25,23 @@ export class PrompterGenerator {
 					case 'Subject':
 						const age = `${faker.number.int(100)}-year-old`
 						const bio = faker.person.bio().replaceAll(/[^\w\s]/g, '')
-						return `${age} ${bio}`
+						return `a ${age} ${faker.person.sex()} ${bio}`.trim()
 
 					case 'Appearance':
 						const adjective = faker.commerce.productAdjective().toLowerCase()
 						return `wearing ${faker.color.human()} ${adjective} attire`
 
 					case 'Activity':
-						const verbing = `${faker.word.verb().replace(/e$/g, '')}ing`
+						const verbing = `${faker.word.verb().replace(/[^e]e$/g, '')}ing`
 						const noun = faker.word.noun()
 						const object = noun.match(/^[aeiou]/) ? `an ${noun}` : `a ${noun}`
 						return `${faker.word.adverb()} ${verbing} ${object}`
 
 					case 'Camera':
-						return segment.options[faker.number.int(segment.options.length - 1)]
+						if (segment.type === 'input')
+							return segment.options?.[
+								faker.number.int(segment.options.length - 1)
+							]
 
 					case 'Location':
 						return `in ${faker.location.country()}`
@@ -98,5 +105,11 @@ const DEFAULT_SEGMENTS: MP.Segment[] = [
 	{
 		type: 'textarea',
 		label: '--no',
+	},
+	{
+		type: 'input',
+		label: '--style',
+		options: ['raw'],
+		value: 'raw',
 	},
 ]

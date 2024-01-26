@@ -23,24 +23,22 @@ declare global {
 		}
 
 		type SegmentDefaults = {
-			readonly label: string
+			label: string
 			value?: string
 		}
 
 		type Segment = TextareaSegment | InputSegment
 
-		type TextareaSegment = SegmentDefaults &
-			Readonly<{
-				type: 'textarea'
-				attributes?: Partial<HTMLTextareaAttributes>
-			}>
+		type TextareaSegment = SegmentDefaults & {
+			type: 'textarea'
+			attributes?: Partial<HTMLTextareaAttributes>
+		}
 
-		type InputSegment = SegmentDefaults &
-			ReadOnly<{
-				type: 'input'
-				options?: string[]
-				attributes?: Partial<HTMLInputAttributes>
-			}>
+		type InputSegment = SegmentDefaults & {
+			type: 'input'
+			options?: string[]
+			attributes?: Partial<HTMLInputAttributes>
+		}
 	}
 }
 

@@ -5,6 +5,5 @@
 ## Roadmap / TODO
 
 - prompt settings (user input)
-- more `--` flags
-- `new PrompterGenerator().random()` with faker.js
-- ChatGPT generate variations
+- openai tp enhance prompts
+- suggestionbox form
