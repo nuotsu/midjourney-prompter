@@ -2,12 +2,23 @@
 	<Output {output} {prompter} />
 
 	<div class="grid gap-2 @xs:grid-cols-[repeat(auto-fit,minmax(250px,1fr))]">
+		{#if prompter.random}
+			<button class="action" on:click={randomize}>Randomize 🤪</button>
+		{/if}
+
 		{#if output}
 			<button class="action" on:click={duplicate}>Duplicate</button>
 		{/if}
 
 		{#if $allPrompts.length > 1}
-			<button class="action warn" on:click={remove}>Delete</button>
+			<button
+				class="action warn"
+				on:click={() => {
+					confirm('Are you sure you want to delete this?') && remove()
+				}}
+			>
+				Delete
+			</button>
 		{/if}
 
 		{#if output}
@@ -21,10 +32,6 @@
 			>
 				Clear all
 			</button>
-		{/if}
-
-		{#if prompter.random}
-			<button class="action" on:click={randomize}>Randomize 🤪</button>
 		{/if}
 	</div>
 </div>
