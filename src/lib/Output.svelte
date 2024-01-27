@@ -1,5 +1,8 @@
 <label for="output-{prompter.id}" class="relative text-sm">
-	<output class="text-lightnavy font-mono" class:glow={output}>
+	<output
+		class="block py-2 px-4 bg-lightnavy/5 text-lightnavy font-mono rounded"
+		class:glow={output}
+	>
 		{#if output}
 			{output}
 		{:else}
@@ -13,7 +16,7 @@
 	{#if output}
 		<Copy
 			id="output-{prompter.id}"
-			class="absolute bottom-0 right-0 z-[1] transition-[opacity,translate]"
+			class="absolute bottom-2 right-3 z-[1] transition-[opacity,translate]"
 			value={output}
 		/>
 	{/if}
