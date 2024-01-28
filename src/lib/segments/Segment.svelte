@@ -6,6 +6,7 @@
 
 		<button
 			class="transition-[opacity,translate] hover:text-red-600"
+			type="button"
 			on:click
 			hidden={!value}
 		>

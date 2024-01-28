@@ -1,4 +1,6 @@
 <label for="output-{prompter.id}" class="relative text-sm">
+	<h2 class="text-lightnavy text-xs mb-1 font-mono">/imagine prompt:</h2>
+
 	<output
 		class="block py-2 px-4 bg-lightnavy/5 text-lightnavy font-mono rounded"
 		class:glow={output}
@@ -17,7 +19,7 @@
 		<Copy
 			id="output-{prompter.id}"
 			class="absolute bottom-2 right-3 z-[1] transition-[opacity,translate]"
-			value={output}
+			value="/imagine prompt:{output}"
 		/>
 	{/if}
 </label>

@@ -100,7 +100,7 @@ const DEFAULT_SEGMENTS: MP.Segment[] = [
 	{
 		type: 'input',
 		label: '--ar',
-		options: ['16:9'],
+		options: ['16:9', '2:3'],
 		attributes: {
 			pattern: '[0-9]{1,}:[0-9]{1,}',
 		},

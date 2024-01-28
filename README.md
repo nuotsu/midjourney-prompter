@@ -4,8 +4,14 @@
 
 ## Roadmap / TODO
 
-- add image uploading
+- sharing
+- lock
+- stats in header
+- helpful resources in footer
+- buy me coffee
+- [prompt syntax highlighting](https://twitter.com/nickfloats/status/1749260418873163836?t=2OwgKZSpRMwyQ_0tgE21cA)
+- suggestion box/form
 - camera[]
-- prompt settings (user input)
 - openai tp enhance prompts
-- suggestionbox form
+- prompt settings (user input)
+- add image uploading
